@@ -1,5 +1,5 @@
 function authenticate(req, res, next) {
-  console.authenticate("Authenticating...");
+  console.log("Authenticating...");
   next();
 }
 
