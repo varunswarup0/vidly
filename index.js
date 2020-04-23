@@ -1,7 +1,8 @@
+const morgan = require("morgan");
 const helmet = require("helmet");
 const Joi = require("joi");
 const logger = require("./logger");
-const authenticater = require("./authenticater");
+// const authenticater = require("./authenticater");
 const express = require("express");
 const app = express();
 
@@ -10,8 +11,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(helmet());
 
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+  console.log("Morgan enabled...");
+}
+
 app.use(logger);
-app.use(authenticater);
+// app.use(authenticater);
 
 const genres = [
   { id: 1, name: "Action" },
