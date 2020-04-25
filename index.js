@@ -8,6 +8,9 @@ const logger = require("./logger");
 const express = require("express");
 const app = express();
 
+app.set("view engine", "pug");
+app.set("views", "./views");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -31,6 +34,10 @@ const genres = [
   { id: 2, name: "Horror" },
   { id: 3, name: "Romance" }
 ];
+
+app.get("/", (req, res) => {
+  res.render("index", { title: "My Express App", message: "Hello" });
+});
 
 app.get("/api/genres", (req, res) => {
   res.send(genres);
